@@ -48,20 +48,74 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation "androidx.core:core-ktx:$ktx_version"
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.5.1'
-    implementation platform('androidx.compose:compose-bom:2022.10.00')
-    implementation 'androidx.compose.ui:ui'
-    implementation 'androidx.compose.ui:ui-graphics'
-    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+
+    // ANDROID COMPOSE
+    def composeBom = platform("androidx.compose:compose-bom:$android_compose_version")
+    implementation composeBom
+    androidTestImplementation composeBom
+
+    // Material Design 3
     implementation 'androidx.compose.material3:material3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
+    // or skip Material Design and build directly on top of foundational components
+    implementation 'androidx.compose.foundation:foundation'
+    // or only import the main APIs for the underlying toolkit systems,
+    // such as input and measurement/layout
+    implementation 'androidx.compose.ui:ui'
+
+    // Android Studio Preview support
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.compose.ui:ui-graphics'
     debugImplementation 'androidx.compose.ui:ui-tooling'
+
+    // UI Tests
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+    // Optional - Integration with activities
+    implementation 'androidx.activity:activity-compose:1.7.2'
+
+    // Compose preview
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_preview_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_preview_version"
+
+    // NAVIGATION COMPOSE
+    implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
+
+    // KOIN
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
+
+    // RETROFIT
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // OKHTTP3 used as callback interceptor to log the responses
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+
+
+    // UNIT TEST
+    testImplementation 'junit:junit:4.13.2'
+
+    // Assertions
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.ext:truth:1.1.5'
+    androidTestImplementation 'com.google.truth:truth:0.42'
+
+    // ESPRESSO - UI TESTING
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // endregion
+
+    // MOCKITO - UNIT TESTING
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
+
+    //For runBlockingTest, CoroutineDispatcher etc.
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+
+    // MockWebServer to mock api rest response
+    testImplementation("com.squareup.okhttp3:mockwebserver:$mockwebservice_version")
+
 }
