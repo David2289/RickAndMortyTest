@@ -2,7 +2,6 @@ package com.davidpl.rickandmortytest.presenter.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -40,6 +38,7 @@ import com.davidpl.rickandmortytest.ui.theme.DustyGray
 import com.davidpl.rickandmortytest.ui.theme.Shamrock
 import com.davidpl.rickandmortytest.ui.theme.Thunderbird
 import com.davidpl.rickandmortytest.ui.theme.Typography
+import com.davidpl.rickandmortytest.utility.CharactersError
 import com.davidpl.rickandmortytest.utility.Loader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -74,17 +73,6 @@ fun HomeScreen(
 }
 
 @Composable
-fun CharactersError() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Something went wrong")
-    }
-}
-
-@Composable
 fun CharactersContent(
     paddingValues: PaddingValues,
     characterList: List<CharacterResultModel>,
@@ -107,9 +95,9 @@ fun CharacterItem(character: CharacterResultModel, navController: NavController)
         .fillMaxSize()
         .padding(25.dp, 20.dp)
         .clickable {
-//            navController.navigate(
-//                "${ARCHUserListActivity.SCREEN_USER_DETAIL}?cardId=${user.id}"
-//            )
+            navController.navigate(
+                "${MainActivity.SCREEN_CHAR_DETAIL}?charId=${character.id}"
+            )
         },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -135,11 +123,6 @@ fun CharacterItem(character: CharacterResultModel, navController: NavController)
                 style = Typography.titleLarge,
                 color = Black
             )
-            val indicatorColor = when (character.statusColor) {
-                CharacterStatus.UNKNOWN -> DustyGray
-                CharacterStatus.ALIVE -> Shamrock
-                CharacterStatus.DEAD -> Thunderbird
-            }
             Row(
                 verticalAlignment = Alignment.CenterVertically
             )
@@ -148,23 +131,23 @@ fun CharacterItem(character: CharacterResultModel, navController: NavController)
                     modifier = Modifier
                         .size(12.dp)
                         .clip(CircleShape)
-                        .background(indicatorColor),
+                        .background(character.indicatorColor),
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
                     text = character.status,
-                    style = Typography.bodyLarge,
+                    style = Typography.bodyMedium,
                     color = Black
                 )
             }
             Text(
                 text = stringResource(id = R.string.home_first_seen_in),
-                style = Typography.bodyLarge,
+                style = Typography.bodyMedium,
                 color = DustyGray
             )
             Text(
                 text = character.origin.name,
-                style = Typography.bodyLarge,
+                style = Typography.bodyMedium,
                 color = Black
             )
         }

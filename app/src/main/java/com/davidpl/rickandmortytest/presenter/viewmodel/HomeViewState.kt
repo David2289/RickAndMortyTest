@@ -11,14 +11,14 @@ data class HomeViewState(
 )
 {
     companion object {
-    fun initial() = HomeViewState(
-        isInactive = true,
-        isLoading = false,
-        charactersLoaded = CharactersModel(
-            info = CharacterInfoModel(0, 0, "", ""),
-            results = listOf()
-        ),
-        charactersError = false
-    )
-}
+        fun initial() = HomeViewState(
+            isInactive = true,
+            isLoading = false,
+            charactersLoaded = CharactersModel(
+                info = CharacterInfoModel(0, 0, "", ""),
+                results = listOf()
+            ),
+            charactersError = false
+        )
+    }
 }

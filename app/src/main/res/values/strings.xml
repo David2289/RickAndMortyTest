@@ -3,4 +3,10 @@
 
     <string name="home_first_seen_in">First seen in:</string>
 
+    <string name="detail_first_seen_in">First seen in:</string>
+    <string name="detail_last_seen_in">Last seen in:</string>
+    <string name="detail_species">Species:</string>
+    <string name="detail_gender">Gender:</string>
+    <string name="detail_type">Type:</string>
+
 </resources>

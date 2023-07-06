@@ -1,5 +1,9 @@
 package com.davidpl.rickandmortytest.presenter.model
 
+import com.davidpl.rickandmortytest.ui.theme.DustyGray
+import com.davidpl.rickandmortytest.ui.theme.Shamrock
+import com.davidpl.rickandmortytest.ui.theme.Thunderbird
+
 data class CharacterResultModel(
     val id: Int,
     val name: String,
@@ -14,4 +18,10 @@ data class CharacterResultModel(
     val episode: List<String>,
     val url: String,
     val created: String
-)
+) {
+    val indicatorColor = when (statusColor) {
+        CharacterStatus.UNKNOWN -> DustyGray
+        CharacterStatus.ALIVE -> Shamrock
+        CharacterStatus.DEAD -> Thunderbird
+    }
+}

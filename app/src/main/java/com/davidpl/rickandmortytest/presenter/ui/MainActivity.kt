@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.davidpl.rickandmortytest.R
+import com.davidpl.rickandmortytest.presenter.viewmodel.DetailViewModel
 import com.davidpl.rickandmortytest.presenter.viewmodel.HomeViewModel
 import com.davidpl.rickandmortytest.ui.theme.Typography
 import com.davidpl.rickandmortytest.ui.theme.BlackWhite
@@ -27,6 +28,7 @@ import org.koin.android.ext.android.get
 class MainActivity : ComponentActivity() {
 
     private val homeViewModel = get<HomeViewModel>()
+    private val detailViewModel = get<DetailViewModel>()
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +64,7 @@ class MainActivity : ComponentActivity() {
                 )
             }
             composable(
-                route = "$SCREEN_CHAR_DETAIL?cardId={$CHAR_SELECTED_ID}",
+                route = "$SCREEN_CHAR_DETAIL?charId={$CHAR_SELECTED_ID}",
                 arguments = listOf(
                     navArgument(CHAR_SELECTED_ID) {
                         defaultValue = 0
@@ -70,10 +72,11 @@ class MainActivity : ComponentActivity() {
                     }
                 )
             ) {
-                HomeScreen(
+                DetailScreen(
                     paddingValues,
-                    homeViewModel,
-                    navController
+                    detailViewModel,
+                    navController,
+                    it.arguments?.getInt(CHAR_SELECTED_ID) ?: 0
                 )
             }
         }
@@ -94,7 +97,7 @@ class MainActivity : ComponentActivity() {
                 Text(
                     stringResource(id = R.string.app_name),
                     color = BlackWhite,
-                    style = Typography.bodyLarge
+                    style = Typography.bodyMedium
                 )
             }
         )
