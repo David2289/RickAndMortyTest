@@ -1,0 +1,31 @@
+
+ext {
+    target_version = 33
+    minsdk_version = 24
+    code_version = 1
+    name_version = "1.0"
+
+    kotlin_version = "1.8.10"
+    ktx_version = "1.10.1"
+    nav_version = "2.4.2"
+    compat_version = "1.6.1"
+    material_version = "1.6.0"
+    constraint_version = "2.1.2"
+    koin_version = "2.2.3"
+    coroutines_version = "1.6.4"
+    retrofit_version = "2.9.0"
+    okhttp3_version = "4.10.0"
+    room_verssion = "2.4.0"
+    viewmodel_version = "2.4.0"
+    livedata_version = "2.4.0"
+    joda_version = "2.10.10"
+    lottie_version = "5.2.0"
+    dots_indicator_version = "1.2.4"
+    mockito_version = "3.8.0"
+    mockwebservice_version = "4.10.0"
+
+    android_compose_version = "2023.04.00"
+    kotlin_compiler_version = "1.4.3"
+    compose_preview_version = "1.4.3"
+    navigation_compose_version = "2.6.0"
+}
