@@ -1,4 +1,4 @@
-package com.davidpl.rickandmortytest
+package com.davidpl.rickandmortytest.presenter.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,11 +11,17 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import com.davidpl.rickandmortytest.R
+import com.davidpl.rickandmortytest.presenter.viewmodel.HomeViewModel
 import com.davidpl.rickandmortytest.ui.theme.Typography
 import com.davidpl.rickandmortytest.ui.theme.BlackWhite
 import com.davidpl.rickandmortytest.ui.theme.RickAndMortyTestTheme
+import org.koin.android.ext.android.get
 
 class MainActivity : ComponentActivity() {
+
+    private val homeViewModel = get<HomeViewModel>()
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +30,10 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = { MainTopBar() },
                     content = { paddingValues ->
-                        HomeScreen(paddingValues)
+                        HomeScreen(
+                            paddingValues,
+                            homeViewModel
+                        )
                     }
                 )
             }
