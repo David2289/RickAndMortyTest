@@ -1,4 +1,4 @@
-package com.davidpl.rickandmortytest.datasource.model
+package com.davidpl.rickandmortytest.presenter.model
 
 data class CharactersModel(
     val info: CharacterInfoModel,

@@ -1,5 +1,6 @@
 package com.davidpl.rickandmortytest.datasource.model
 
+import com.davidpl.rickandmortytest.presenter.model.CharactersModel
 import com.google.gson.annotations.SerializedName
 
 data class CharacterApiModel(

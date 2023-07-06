@@ -1,5 +1,6 @@
 package com.davidpl.rickandmortytest.datasource.model
 
+import com.davidpl.rickandmortytest.presenter.model.CharacterInfoModel
 import com.google.gson.annotations.SerializedName
 
 data class CharacterInfoApiModel(
@@ -13,7 +14,7 @@ data class CharacterInfoApiModel(
     val next: String,
 
     @SerializedName("prev")
-    val prev: String
+    val prev: String?
 
 )
 

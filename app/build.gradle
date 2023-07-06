@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -83,6 +84,25 @@ dependencies {
 
     // NAVIGATION COMPOSE
     implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
+
+    // LIFECYCLE COMPOSE // collectAsStateWithLifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
+
+    // LOTTIE COMPOSE
+    implementation "com.airbnb.android:lottie-compose:$lottie_version"
+
+    // GLIDE COMPOSE
+    implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
+
+
+    // ANDROID JETPACK - NAVIGATION COMPONENT
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // ANDROID JETPACK - ANDROID ROOM
+    implementation "androidx.room:room-runtime:$room_verssion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "androidx.room:room-compiler:$room_verssion"
 
     // KOIN
     implementation "io.insert-koin:koin-android:$koin_version"

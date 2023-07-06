@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -37,6 +38,9 @@ class HomeViewModel(
     }
 
     private fun retrieveCharacters() {
+        _viewState.update {
+            it.copy(isInactive = false, isLoading = true)
+        }
         viewModelScope.launch {
             charactersUseCase
                 .retrieveCharactersUseCase
@@ -44,13 +48,22 @@ class HomeViewModel(
                 .onEach { dataSate ->
                     when (dataSate) {
                         is DataState.Success -> {
-                            println("RANKINET_TESTING retrieved list: ${dataSate.data.results}")
+                            _viewState.update {
+                                it.copy(isInactive = false, isLoading = false, charactersLoaded = dataSate.data)
+                            }
+                            println("RICK_TESTING retrieved list: ${dataSate.data.results}")
                         }
                         is DataState.Failure -> {
-                            println("RANKINET_TESTING failure exception: ${dataSate.data.exception}")
+                            _viewState.update {
+                                it.copy(isInactive = false, isLoading = false, charactersError = true)
+                            }
+                            println("RICK_TESTING failure exception: ${dataSate.data.exception}")
                         }
                         else -> {
-                            println("RANKINET_TESTING error")
+                            _viewState.update {
+                                it.copy(isInactive = false, isLoading = false, charactersError = true)
+                            }
+                            println("RICK_TESTING error")
                         }
                     }
                 }

@@ -1,5 +1,7 @@
 package com.davidpl.rickandmortytest.datasource.model
 
+import com.davidpl.rickandmortytest.presenter.model.CharacterResultModel
+import com.davidpl.rickandmortytest.presenter.model.CharacterStatus
 import com.google.gson.annotations.SerializedName
 
 data class CharacterResultApiModel(
@@ -40,11 +42,18 @@ data class CharacterResultApiModel(
     val created: String
 )
 
-fun CharacterResultApiModel.toDomain() =
-    CharacterResultModel(
+fun CharacterResultApiModel.toDomain(): CharacterResultModel {
+    val domainStatus = when (status) {
+        "Alive" -> CharacterStatus.ALIVE
+        "unknown" -> CharacterStatus.UNKNOWN
+        "Dead" -> CharacterStatus.DEAD
+        else -> CharacterStatus.UNKNOWN
+    }
+    return CharacterResultModel(
         id = id,
         name = name,
         status = status,
+        statusColor = domainStatus,
         species = species,
         type = type,
         gender = gender,
@@ -55,3 +64,4 @@ fun CharacterResultApiModel.toDomain() =
         url = url,
         created = created
     )
+}

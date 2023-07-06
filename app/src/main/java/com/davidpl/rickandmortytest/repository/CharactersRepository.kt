@@ -3,7 +3,7 @@ package com.davidpl.rickandmortytest.repository
 import com.davidpl.rickandmortytest.datasource.local.LocalCharactersDataSource
 import com.davidpl.rickandmortytest.datasource.remote.RemoteCharactersDataSource
 import com.davidpl.rickandmortytest.states.DataState
-import com.davidpl.rickandmortytest.datasource.model.CharactersModel
+import com.davidpl.rickandmortytest.presenter.model.CharactersModel
 import kotlinx.coroutines.flow.Flow
 
 class CharactersRepository(

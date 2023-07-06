@@ -1,8 +1,8 @@
 package com.davidpl.rickandmortytest.datasource.local
 
 import com.davidpl.rickandmortytest.states.DataState
-import com.davidpl.rickandmortytest.datasource.model.CharacterInfoModel
-import com.davidpl.rickandmortytest.datasource.model.CharactersModel
+import com.davidpl.rickandmortytest.presenter.model.CharacterInfoModel
+import com.davidpl.rickandmortytest.presenter.model.CharactersModel
 import kotlinx.coroutines.flow.flow
 
 class LocalCharactersDataSource {
