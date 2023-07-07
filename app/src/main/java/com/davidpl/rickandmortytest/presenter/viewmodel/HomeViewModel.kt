@@ -51,19 +51,16 @@ class HomeViewModel(
                             _viewState.update {
                                 it.copy(isInactive = false, isLoading = false, charactersLoaded = dataSate.data)
                             }
-                            println("RICK_TESTING retrieved list: ${dataSate.data.results}")
                         }
                         is DataState.Failure -> {
                             _viewState.update {
                                 it.copy(isInactive = false, isLoading = false, charactersError = true)
                             }
-                            println("RICK_TESTING failure exception: ${dataSate.data.exception}")
                         }
                         else -> {
                             _viewState.update {
                                 it.copy(isInactive = false, isLoading = false, charactersError = true)
                             }
-                            println("RICK_TESTING error")
                         }
                     }
                 }

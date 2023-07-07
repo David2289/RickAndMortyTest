@@ -27,23 +27,40 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.davidpl.rickandmortytest.R
 import com.davidpl.rickandmortytest.presenter.model.CharacterResultModel
+import com.davidpl.rickandmortytest.presenter.ui.states.AppBarState
+import com.davidpl.rickandmortytest.presenter.ui.states.Screen
 import com.davidpl.rickandmortytest.presenter.viewmodel.DetailDataIntent
 import com.davidpl.rickandmortytest.presenter.viewmodel.DetailViewModel
-import com.davidpl.rickandmortytest.ui.theme.Black
-import com.davidpl.rickandmortytest.ui.theme.DustyGray
-import com.davidpl.rickandmortytest.ui.theme.Typography
+import com.davidpl.rickandmortytest.presenter.ui.theme.Black
+import com.davidpl.rickandmortytest.presenter.ui.theme.Typography
 import com.davidpl.rickandmortytest.utility.CharactersError
 import com.davidpl.rickandmortytest.utility.Loader
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 
 @Composable
 fun DetailScreen(
     paddingValues: PaddingValues,
+    appBarState: AppBarState,
     viewModel: DetailViewModel,
-    navController: NavController,
+    onNavBackPressed: () -> Unit,
     characterId: Int
 ) {
+
+    val screen = appBarState.currentScreen as? Screen.Detail
+    LaunchedEffect(key1 = screen) {
+        screen?.buttons?.onEach { button ->
+            when (button) {
+                Screen.Detail.AppBarIcons.NavigationIcon -> {
+                    println("RICK_TEST Screen Detail Screen.Detail.AppBarIcons.NavigationIcon")
+                    onNavBackPressed.invoke()
+                }
+                else -> {}
+            }
+        }?.launchIn(this)
+    }
 
     LaunchedEffect(Unit) {
         withContext(Dispatchers.Main.immediate) {

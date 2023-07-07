@@ -1,4 +1,4 @@
-package com.davidpl.rickandmortytest.ui.theme
+package com.davidpl.rickandmortytest.presenter.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

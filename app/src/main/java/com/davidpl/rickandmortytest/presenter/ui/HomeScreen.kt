@@ -30,14 +30,13 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.davidpl.rickandmortytest.R
 import com.davidpl.rickandmortytest.presenter.model.CharacterResultModel
-import com.davidpl.rickandmortytest.presenter.model.CharacterStatus
+import com.davidpl.rickandmortytest.presenter.ui.states.AppBarState
+import com.davidpl.rickandmortytest.presenter.ui.states.DetailRoute
 import com.davidpl.rickandmortytest.presenter.viewmodel.HomeDataIntent
 import com.davidpl.rickandmortytest.presenter.viewmodel.HomeViewModel
-import com.davidpl.rickandmortytest.ui.theme.Black
-import com.davidpl.rickandmortytest.ui.theme.DustyGray
-import com.davidpl.rickandmortytest.ui.theme.Shamrock
-import com.davidpl.rickandmortytest.ui.theme.Thunderbird
-import com.davidpl.rickandmortytest.ui.theme.Typography
+import com.davidpl.rickandmortytest.presenter.ui.theme.Black
+import com.davidpl.rickandmortytest.presenter.ui.theme.DustyGray
+import com.davidpl.rickandmortytest.presenter.ui.theme.Typography
 import com.davidpl.rickandmortytest.utility.CharactersError
 import com.davidpl.rickandmortytest.utility.Loader
 import kotlinx.coroutines.Dispatchers
@@ -46,9 +45,19 @@ import kotlinx.coroutines.withContext
 @Composable
 fun HomeScreen(
     paddingValues: PaddingValues,
+    appBarState: AppBarState,
     viewModel: HomeViewModel,
     navController: NavController
 ) {
+
+//    val screen = appBarState.currentScreen as? Screen.Home
+//    LaunchedEffect(key1 = screen) {
+//        screen?.buttons?.onEach { button ->
+//            when (button) {
+//                Screen.Home.AppBarIcons.Settings -> onSettingsClick()
+//            }
+//        }?.launchIn(this)
+//    }
 
     LaunchedEffect(Unit) {
         withContext(Dispatchers.Main.immediate) {
@@ -96,7 +105,7 @@ fun CharacterItem(character: CharacterResultModel, navController: NavController)
         .padding(25.dp, 20.dp)
         .clickable {
             navController.navigate(
-                "${MainActivity.SCREEN_CHAR_DETAIL}?charId=${character.id}"
+                "${DetailRoute}?charId=${character.id}"
             )
         },
         verticalAlignment = Alignment.CenterVertically

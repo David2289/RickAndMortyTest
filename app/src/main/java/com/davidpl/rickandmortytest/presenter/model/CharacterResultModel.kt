@@ -1,8 +1,8 @@
 package com.davidpl.rickandmortytest.presenter.model
 
-import com.davidpl.rickandmortytest.ui.theme.DustyGray
-import com.davidpl.rickandmortytest.ui.theme.Shamrock
-import com.davidpl.rickandmortytest.ui.theme.Thunderbird
+import com.davidpl.rickandmortytest.presenter.ui.theme.DustyGray
+import com.davidpl.rickandmortytest.presenter.ui.theme.Shamrock
+import com.davidpl.rickandmortytest.presenter.ui.theme.Thunderbird
 
 data class CharacterResultModel(
     val id: Int,
