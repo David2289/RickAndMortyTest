@@ -94,10 +94,7 @@ class MainActivity : ComponentActivity() {
                     paddingValues,
                     appBarState,
                     detailViewModel,
-                    onNavBackPressed = {
-                        println("RICK_TEST MainActivity onNavBackPressed")
-                        navController.popBackStack()
-                                       },
+                    onNavBackPressed = { navController.popBackStack() },
                     it.arguments?.getInt(charId) ?: 0
                 )
             }
@@ -126,7 +123,6 @@ class MainActivity : ComponentActivity() {
                 val navigationIcon = appBarState.navigationIcon
                 if (navigationIcon != null) {
                     IconButton(onClick = {
-                        println("RICK_TEST MainActivity navigationIcon onClick: ${navigationIcon.onClick}")
                         navigationIcon.onClick.invoke()
                     }) {
                         Icon(

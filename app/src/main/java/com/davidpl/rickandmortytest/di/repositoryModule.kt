@@ -10,7 +10,7 @@ var repositoryModule = module {
 
     single(named(TARGETS_REPOSITORY)) {
         CharactersRepository(
-            get(named(LOCAL_TARGETS_DATA_SOURCE)),
+            get(named(LOCAL_CHARACTERS_DATA_SOURCE)),
             get(named(REMOTE_TARGETS_DATA_SOURCE))
         )
     }

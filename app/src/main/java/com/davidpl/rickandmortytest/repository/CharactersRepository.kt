@@ -14,7 +14,14 @@ open class CharactersRepository(
     suspend fun retrieveCharacters(fromRemote: Boolean = true): DataState<CharactersModel> {
         return when (fromRemote) {
             true -> {
-                remoteCharactersDataSource.retrieveCharacters()
+                val result = remoteCharactersDataSource.retrieveCharacters()
+                when (result) {
+                    is DataState.Success -> {
+                        localCharactersDataSource.insertCharacters(result.data.results)
+                        result
+                    }
+                    else -> result
+                }
             }
             else -> {
                 localCharactersDataSource.retrieveCharacters()

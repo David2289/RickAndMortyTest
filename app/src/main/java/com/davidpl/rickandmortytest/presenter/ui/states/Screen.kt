@@ -57,10 +57,7 @@ sealed interface Screen {
             iconRes = R.drawable.ic_arrow_left_white_16dp,
             iconTint = White,
             contentDescription = "Back",
-            onClick = {
-                println("RICK_TEST Screen Detail NavigationIcon onClick")
-                _buttons.tryEmit(AppBarIcons.NavigationIcon)
-            }
+            onClick = { _buttons.tryEmit(AppBarIcons.NavigationIcon) }
         )
         override val title: String = "Detail"
         override val actions: List<AppBarMenuItem> = listOf(

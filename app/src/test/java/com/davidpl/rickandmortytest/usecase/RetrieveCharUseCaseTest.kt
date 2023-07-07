@@ -4,14 +4,11 @@ import com.davidpl.rickandmortytest.domain.RetrieveCharUseCase
 import com.davidpl.rickandmortytest.presenter.model.CharacterInfoModel
 import com.davidpl.rickandmortytest.presenter.model.CharacterLocationModel
 import com.davidpl.rickandmortytest.presenter.model.CharacterResultModel
-import com.davidpl.rickandmortytest.presenter.model.CharacterStatus
 import com.davidpl.rickandmortytest.presenter.model.CharactersModel
 import com.davidpl.rickandmortytest.repository.CharactersRepository
 import com.davidpl.rickandmortytest.states.DataState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -42,7 +39,7 @@ class RetrieveCharUseCaseTest {
         val characterAdIndex1 = getCharactersResult().results.find { it.id == charId }
 
         Mockito
-            .`when`(charactersRepository.retrieveCharacters(true))
+            .`when`(charactersRepository.retrieveCharacters(false))
             .thenReturn(DataState.Success(charactersModel))
 
         val firstSentence = retrieveCharUseCase.invoke(charId).first()
@@ -57,14 +54,13 @@ class RetrieveCharUseCaseTest {
                     1,
                     "Rick",
                     "",
-                    CharacterStatus.ALIVE,
                     "",
                     "",
                     "",
                     CharacterLocationModel("", ""),
                     CharacterLocationModel("", ""),
                     "",
-                    listOf(),
+                    "",
                     "",
                     ""
                 ),
@@ -72,14 +68,13 @@ class RetrieveCharUseCaseTest {
                     2,
                     "Morty",
                     "",
-                    CharacterStatus.ALIVE,
                     "",
                     "",
                     "",
                     CharacterLocationModel("", ""),
                     CharacterLocationModel("", ""),
                     "",
-                    listOf(),
+                    "",
                     "",
                     ""
                 )

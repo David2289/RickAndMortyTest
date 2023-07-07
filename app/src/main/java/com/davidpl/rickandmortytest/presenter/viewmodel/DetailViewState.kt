@@ -2,7 +2,6 @@ package com.davidpl.rickandmortytest.presenter.viewmodel
 
 import com.davidpl.rickandmortytest.presenter.model.CharacterLocationModel
 import com.davidpl.rickandmortytest.presenter.model.CharacterResultModel
-import com.davidpl.rickandmortytest.presenter.model.CharacterStatus
 
 data class DetailViewState(
     val isInactive: Boolean,
@@ -19,14 +18,13 @@ data class DetailViewState(
                 id = 0,
                 name = "",
                 status = "",
-                statusColor = CharacterStatus.UNKNOWN,
                 species = "",
                 type = "",
                 gender = "",
                 origin = CharacterLocationModel("", ""),
                 location = CharacterLocationModel("", ""),
                 image = "",
-                episode = listOf(),
+                episodeJson = "",
                 url = "",
                 created = ""
             ),

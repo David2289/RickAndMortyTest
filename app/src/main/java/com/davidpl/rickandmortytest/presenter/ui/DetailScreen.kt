@@ -27,6 +27,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.davidpl.rickandmortytest.R
 import com.davidpl.rickandmortytest.presenter.model.CharacterResultModel
+import com.davidpl.rickandmortytest.presenter.model.getIndicatorColor
 import com.davidpl.rickandmortytest.presenter.ui.states.AppBarState
 import com.davidpl.rickandmortytest.presenter.ui.states.Screen
 import com.davidpl.rickandmortytest.presenter.viewmodel.DetailDataIntent
@@ -53,10 +54,7 @@ fun DetailScreen(
     LaunchedEffect(key1 = screen) {
         screen?.buttons?.onEach { button ->
             when (button) {
-                Screen.Detail.AppBarIcons.NavigationIcon -> {
-                    println("RICK_TEST Screen Detail Screen.Detail.AppBarIcons.NavigationIcon")
-                    onNavBackPressed.invoke()
-                }
+                Screen.Detail.AppBarIcons.NavigationIcon -> { onNavBackPressed.invoke() }
                 else -> {}
             }
         }?.launchIn(this)
@@ -107,7 +105,7 @@ fun CharDetailContent(
                     .height(155.dp)
                     .padding(25.dp)
                     .clip(CircleShape)
-                    .border(5.dp, color = character.indicatorColor, shape = CircleShape)
+                    .border(5.dp, color = character.getIndicatorColor(), shape = CircleShape)
             ) {
                 it
                     .error(R.drawable.ic_close_black_16dp)

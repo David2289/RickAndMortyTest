@@ -30,6 +30,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.davidpl.rickandmortytest.R
 import com.davidpl.rickandmortytest.presenter.model.CharacterResultModel
+import com.davidpl.rickandmortytest.presenter.model.getIndicatorColor
 import com.davidpl.rickandmortytest.presenter.ui.states.AppBarState
 import com.davidpl.rickandmortytest.presenter.ui.states.DetailRoute
 import com.davidpl.rickandmortytest.presenter.viewmodel.HomeDataIntent
@@ -131,7 +132,7 @@ fun CharacterItem(character: CharacterResultModel, navController: NavController)
                     modifier = Modifier
                         .size(12.dp)
                         .clip(CircleShape)
-                        .background(character.indicatorColor),
+                        .background(character.getIndicatorColor()),
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(

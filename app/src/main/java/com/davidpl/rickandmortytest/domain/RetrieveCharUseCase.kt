@@ -11,7 +11,7 @@ class RetrieveCharUseCase(
 ) {
 
     operator fun invoke(characterId: Int) = flow {
-        val result = charactersRepository.retrieveCharacters()
+        val result = charactersRepository.retrieveCharacters(fromRemote = false)
         when (result) {
             is DataState.Success -> {
                 val character = result.data.results.find { it.id == characterId }
