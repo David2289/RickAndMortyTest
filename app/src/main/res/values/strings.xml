@@ -2,6 +2,9 @@
     <string name="app_name">RickAndMortyTest</string>
 
     <string name="home_first_seen_in">First seen in:</string>
+    <string name="home_filter_dialog_desc">Filter list by name:</string>
+    <string name="home_filter_dialog_cancel">Cancel</string>
+    <string name="home_filter_dialog_apply">Apply</string>
 
     <string name="detail_first_seen_in">First seen in:</string>
     <string name="detail_last_seen_in">Last seen in:</string>

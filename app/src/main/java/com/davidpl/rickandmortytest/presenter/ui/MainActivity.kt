@@ -13,6 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavHostController
@@ -21,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.davidpl.rickandmortytest.R
 import com.davidpl.rickandmortytest.presenter.ui.states.AppBarState
 import com.davidpl.rickandmortytest.presenter.ui.states.DetailRoute
 import com.davidpl.rickandmortytest.presenter.ui.states.HomeRoute
@@ -46,14 +51,23 @@ class MainActivity : ComponentActivity() {
                 val appBarState = rememberAppBarState(
                     navController,
                 )
+                var isFilterApplied by remember {
+                    mutableStateOf(false)
+                }
                 Scaffold(
-                    topBar = { MainTopBar(appBarState) },
+                    topBar = {
+                        MainTopBar(
+                            appBarState,
+                            isFilterApplied
+                        )
+                    },
                     content = { paddingValues ->
                         NavigationHost(
                             paddingValues,
                             appBarState,
                             navController,
-                            homeViewModel
+                            homeViewModel,
+                            onFilterChange = { isFilterApplied = it }
                         )
                     }
                 )
@@ -66,7 +80,8 @@ class MainActivity : ComponentActivity() {
         paddingValues: PaddingValues,
         appBarState: AppBarState,
         navController: NavHostController,
-        homeViewModel: HomeViewModel
+        homeViewModel: HomeViewModel,
+        onFilterChange: (isFilterApplied: Boolean) -> Unit
     ) {
 
         NavHost(
@@ -78,7 +93,8 @@ class MainActivity : ComponentActivity() {
                     paddingValues,
                     appBarState,
                     homeViewModel,
-                    navController
+                    navController,
+                    onFilterChange
                 )
             }
             composable(
@@ -101,14 +117,11 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    companion object {
-        const val charId = "charId"
-    }
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MainTopBar(
-        appBarState: AppBarState
+        appBarState: AppBarState,
+        isFilterApplied: Boolean
     ) {
         TopAppBar(
             colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
@@ -132,7 +145,24 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 }
+            },
+            actions = {
+                appBarState.actions.forEach { appBarMenuItem ->
+                    val iconVector = ImageVector.vectorResource(id = if (isFilterApplied) R.drawable.ic_close_black_16dp else appBarMenuItem.iconRes)
+                    IconButton(onClick = { appBarMenuItem.onClick.invoke() }) {
+                        Icon(
+                            imageVector = iconVector,
+                            contentDescription = appBarMenuItem.contentDescription,
+                            tint = appBarMenuItem.iconColor
+                        )
+                    }
+                }
             }
         )
     }
+
+    companion object {
+        const val charId = "charId"
+    }
+
 }

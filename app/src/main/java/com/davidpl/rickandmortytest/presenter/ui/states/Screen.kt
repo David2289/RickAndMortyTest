@@ -33,17 +33,16 @@ sealed interface Screen {
         override val title: String = "Home"
         override val actions: List<AppBarMenuItem> = listOf(
             AppBarMenuItem(
-                title = "Settings",
-                onClick = {
-                    _buttons.tryEmit(AppBarIcons.Settings)
-                },
-                icon = Icons.Filled.Settings,
+                title = "Filter",
+                onClick = { _buttons.tryEmit(AppBarIcons.Filter) },
+                iconRes = R.drawable.ic_filter_black_16dp,
+                iconColor = White,
                 contentDescription = null,
             )
         )
 
         enum class AppBarIcons {
-            Settings
+            Filter
         }
 
         private val _buttons = MutableSharedFlow<AppBarIcons>(extraBufferCapacity = 1)
@@ -60,16 +59,7 @@ sealed interface Screen {
             onClick = { _buttons.tryEmit(AppBarIcons.NavigationIcon) }
         )
         override val title: String = "Detail"
-        override val actions: List<AppBarMenuItem> = listOf(
-            AppBarMenuItem(
-                title = "Settings",
-                onClick = {
-                    _buttons.tryEmit(AppBarIcons.Settings)
-                },
-                icon = Icons.Filled.Settings,
-                contentDescription = null,
-            )
-        )
+        override val actions: List<AppBarMenuItem> = listOf()
 
         enum class AppBarIcons {
             NavigationIcon,
