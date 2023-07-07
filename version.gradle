@@ -21,7 +21,7 @@ ext {
     joda_version = "2.10.10"
     lottie_version = "5.2.0"
     dots_indicator_version = "1.2.4"
-    mockito_version = "3.8.0"
+    mockito_version = "5.2.0"
     mockwebservice_version = "4.10.0"
 
     android_compose_version = "2023.04.00"

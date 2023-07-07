@@ -50,15 +50,6 @@ fun HomeScreen(
     navController: NavController
 ) {
 
-//    val screen = appBarState.currentScreen as? Screen.Home
-//    LaunchedEffect(key1 = screen) {
-//        screen?.buttons?.onEach { button ->
-//            when (button) {
-//                Screen.Home.AppBarIcons.Settings -> onSettingsClick()
-//            }
-//        }?.launchIn(this)
-//    }
-
     LaunchedEffect(Unit) {
         withContext(Dispatchers.Main.immediate) {
             viewModel.dataIntent.send(HomeDataIntent.LoadCharacters)

@@ -7,15 +7,11 @@ import kotlinx.coroutines.flow.flow
 
 class LocalCharactersDataSource {
 
-    fun retrieveCharacters() = flow {
-        emit(
-            DataState.Success(
-                CharactersModel(
-                    info = CharacterInfoModel(0, 0, "", ""),
-                    results = listOf()
-                )
-            )
+    fun retrieveCharacters() = DataState.Success(
+        CharactersModel(
+            info = CharacterInfoModel(0, 0, "", ""),
+            results = listOf()
         )
-    }
+    )
 
 }

@@ -6,12 +6,12 @@ import com.davidpl.rickandmortytest.states.DataState
 import com.davidpl.rickandmortytest.presenter.model.CharactersModel
 import kotlinx.coroutines.flow.Flow
 
-class CharactersRepository(
+open class CharactersRepository(
     private val localCharactersDataSource: LocalCharactersDataSource,
     private val remoteCharactersDataSource: RemoteCharactersDataSource
 ) {
 
-    fun retrieveCharacters(fromRemote: Boolean = true): Flow<DataState<CharactersModel>> {
+    suspend fun retrieveCharacters(fromRemote: Boolean = true): DataState<CharactersModel> {
         return when (fromRemote) {
             true -> {
                 remoteCharactersDataSource.retrieveCharacters()
