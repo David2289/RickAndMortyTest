@@ -22,6 +22,8 @@ class HomeViewModel(
     private val _viewState = MutableStateFlow(HomeViewState.initial())
     val viewState: StateFlow<HomeViewState> = _viewState
 
+    var filterTextValue = ""
+
     init {
         viewModelScope.launch {
             dataIntent

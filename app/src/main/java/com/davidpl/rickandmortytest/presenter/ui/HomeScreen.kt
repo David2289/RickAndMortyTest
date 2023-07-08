@@ -71,11 +71,11 @@ fun HomeScreen(
     var showDialog by remember { mutableStateOf(false) }
 
     var textFieldValue by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf(TextFieldValue(viewModel.filterTextValue))
     }
 
     var isFilterApplied by remember {
-        mutableStateOf(false)
+        mutableStateOf(viewModel.filterTextValue.isNotEmpty())
     }
 
     val screen = appBarState.currentScreen as? Screen.Home
@@ -85,6 +85,7 @@ fun HomeScreen(
                 Screen.Home.AppBarIcons.Filter -> {
                     if (isFilterApplied) {
                         isFilterApplied = false
+                        viewModel.filterTextValue = ""
                         onFilterChange.invoke(false)
                     } else {
                         showDialog = showDialog.not()
@@ -123,8 +124,7 @@ fun HomeScreen(
             CharactersContent(
                 paddingValues,
                 listResult,
-                navController,
-                onFilterChange
+                navController
             )
         }
     }
@@ -165,6 +165,7 @@ fun HomeScreen(
                     }
                     TextButton(
                         onClick = {
+                            viewModel.filterTextValue = textFieldValue.text
                             isFilterApplied = true
                             onFilterChange.invoke(true)
                             showDialog = false
@@ -186,14 +187,13 @@ fun HomeScreen(
 fun CharactersContent(
     paddingValues: PaddingValues,
     characterList: List<CharacterResultModel>,
-    navController: NavController,
-    onFilterChange: (isFilterApplied: Boolean) -> Unit
+    navController: NavController
 ) {
     LazyColumn(modifier = Modifier.padding(paddingValues)) {
         items(
             items = characterList,
             itemContent = {
-                CharacterItem(it, navController, onFilterChange)
+                CharacterItem(it, navController)
             }
         )
     }
@@ -203,14 +203,12 @@ fun CharactersContent(
 @Composable
 fun CharacterItem(
     character: CharacterResultModel,
-    navController: NavController,
-    onFilterChange: (isFilterApplied: Boolean) -> Unit
+    navController: NavController
 ) {
     Row(modifier = Modifier
         .fillMaxSize()
         .padding(25.dp, 20.dp)
         .clickable {
-            onFilterChange.invoke(false)
             navController.navigate(
                 "${DetailRoute}?charId=${character.id}"
             )
